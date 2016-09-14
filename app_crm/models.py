@@ -7,14 +7,14 @@ class Asset(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], blank=True) # validators should be a list
+    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15) # validators should be a list
     email = models.EmailField()
-    website = models.UrlField(max_length=300)
-    street = CharField(max_length=50)
-    street2 = CharField(max_length=20)
-    city = CharField(max_length=30)
-    state = CharField(max_length=4)
-    country = CharField(max_length=30)
+    website = models.CharField(max_length=300)
+    street = models.CharField(max_length=50)
+    street2 = models.CharField(max_length=20)
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=4)
+    country = models.CharField(max_length=30)
 
 class User(models.Model):
     asset = models.ForeignKey(Asset)
@@ -24,13 +24,13 @@ class Company(models.Model):
     users = models.ForeignKey("auth.User")
     name = models.CharField(max_length=50)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], blank=True) # validators should be a list
-    website = models.UrlField(max_length=300)
-    street = CharField(max_length=50)
-    street2 = CharField(max_length=20)
-    city = CharField(max_length=30)
-    state = CharField(max_length=4)
-    country = CharField(max_length=30)
+    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15) # validators should be a list
+    website = models.CharField(max_length=300)
+    street = models.CharField(max_length=50)
+    street2 = models.CharField(max_length=20)
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=4)
+    country = models.CharField(max_length=30)
 
 class Customer(models.Model):
     asset = models.ForeignKey(Asset)
