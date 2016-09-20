@@ -12,23 +12,37 @@ class Company(models.Model):
 class Asset(models.Model):
     user = models.ForeignKey("auth.User", null=True, blank=True)
     is_company = models.BooleanField(default=False)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    company = models.ForeignKey(Company)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+    company = models.ForeignKey(Company, null=True, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15)  # validators should be a list
     email = models.EmailField()
     street = models.CharField(max_length=50)
-    street2 = models.CharField(max_length=20)
+    street2 = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=4)
-    zip_code = models.IntegerField(max_length=10)
+    zip_code = models.CharField(max_length=10)
     country = models.CharField(max_length=30)
     website = models.URLField(max_length=350)
     twitter = models.URLField(max_length=350)
     facebook = models.URLField(max_length=350)
     linkedin = models.URLField(max_length=350)
     profile_picture = models.ImageField(upload_to="profile_images", blank=True, null=True)
+
+    # @property
+    # def company(self):
+    #     if self.is_company:
+    #         return
+    #     else:
+    #         return
+
+    @property
+    def profile_picture_url(self):
+        if self.profile_picture:
+            return self.profile_picture.url
+        else:
+            return "http://www.sessionlogs.com/media/icons/defaultIcon.png"
 
 
 class Note(models.Model):
@@ -42,7 +56,7 @@ class Note(models.Model):
 
 class Task(models.Model):
     creator = models.ForeignKey('auth.User')
-    assigned_to = models.ForeignKey('auth.User')  # ?
+    assigned_to = models.ForeignKey('auth.User', related_name="Assignee")
     task_is_about = models.ForeignKey(Asset)
     task = models.TextField()
     due_date = models.DateTimeField()
@@ -60,4 +74,4 @@ def create_user_profile(**kwargs):
     created = kwargs.get("created")
     instance = kwargs.get("instance")
     if created:
-        Asset.objects.create(profile_user=instance)
+        Asset.objects.create(user=instance)
