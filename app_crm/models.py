@@ -1,52 +1,77 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+class Company(models.Model):
+    name = models.CharField(max_length=50)
 
 
 class Asset(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    user = models.ForeignKey("auth.User", null=True, blank=True)
+    is_company = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=50, blank=True, null=True)
+    last_name = models.CharField(max_length=50, blank=True, null=True)
+    company = models.ForeignKey(Company, null=True, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15) # validators should be a list
+    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15)  # validators should be a list
     email = models.EmailField()
-    website = models.CharField(max_length=300)
     street = models.CharField(max_length=50)
-    street2 = models.CharField(max_length=20)
+    street2 = models.CharField(max_length=50)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=4)
+    zip_code = models.CharField(max_length=10)
     country = models.CharField(max_length=30)
+    website = models.URLField(max_length=350)
+    twitter = models.URLField(max_length=350)
+    facebook = models.URLField(max_length=350)
+    linkedin = models.URLField(max_length=350)
+    profile_picture = models.ImageField(upload_to="profile_images", blank=True, null=True)
 
-class User(models.Model):
-    asset = models.ForeignKey(Asset)
-    user = models.ForeignKey("auth.User")
+    # @property
+    # def company(self):
+    #     if self.is_company:
+    #         return
+    #     else:
+    #         return
 
-class Company(models.Model):
-    users = models.ForeignKey("auth.User")
-    name = models.CharField(max_length=50)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15) # validators should be a list
-    website = models.CharField(max_length=300)
-    street = models.CharField(max_length=50)
-    street2 = models.CharField(max_length=20)
-    city = models.CharField(max_length=30)
-    state = models.CharField(max_length=4)
-    country = models.CharField(max_length=30)
+    @property
+    def profile_picture_url(self):
+        if self.profile_picture:
+            return self.profile_picture.url
+        else:
+            return "http://www.sessionlogs.com/media/icons/defaultIcon.png"
 
-class Customer(models.Model):
-    asset = models.ForeignKey(Asset)
-    notes = models.TextField(null=True, blank=True)
-    # Other fields can be applied here... just need to flesh out this functionality
-    # What things do you need to know about a customer that are not in the company level or the asset level?
-
-class Orginization(models.Model):
-    customers = models.ForeignKey(Customer)
-    # Also not completely sure of full functionality here.
 
 class Note(models.Model):
-    users = models.ForeignKey("auth.User")
+    note_creator = models.ForeignKey('auth.User')
+    note_is_about = models.ForeignKey(Asset)
+    note = models.TextField()
+    note_picture = models.ImageField(upload_to="note_images", blank=True, null=True)
+    note_file = models.FileField(upload_to='note_files', blank=True, null=True)
+    created = models.DateTimeField(auto_now=True)
+
 
 class Task(models.Model):
-    users = models.ForeignKey("auth.User")
+    creator = models.ForeignKey('auth.User')
+    assigned_to = models.ForeignKey('auth.User', related_name="Assignee")
+    task_is_about = models.ForeignKey(Asset)
+    task = models.TextField()
+    due_date = models.DateTimeField()
+    completed = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now=True)
+
 
 class Tag(models.Model):
-    users = models.ForeignKey("auth.User")
+    user = models.ManyToManyField('auth.User')
+    tag = models.CharField(max_length=25)
+
+
+@receiver(post_save, sender='auth.User')
+def create_user_profile(**kwargs):
+    created = kwargs.get("created")
+    instance = kwargs.get("instance")
+    if created:
+        Asset.objects.create(user=instance)
