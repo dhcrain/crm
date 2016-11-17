@@ -20,3 +20,6 @@ class CreateAssetView(CreateView):
 
 class AssetListView(ListView):
     model = Asset
+
+    def get_queryset(self):
+        return Asset.objects.all()

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    <table class='table'>
+        <th>
+          <tr>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Company</td>
+            <td>Phone Number</td>
+            <td>Email</td>
+            <td>Street</td>
+            <td>Street 2</td>
+            <td>City</td>
+            <td>State</td>
+            <td>Zip Code</td>
+            <td>Country</td>
+            <td>Web Site</td>
+            <td>Twitter</td>
+            <td>Facebook</td>
+            <td>Linkedin</td>
+          </tr>
+        </th>
+      {% for object in object_list %}
+        <tr>
+          <td>{{ object.first_name }}</td>
+          <td>{{ object.last_name }}</td>
+          <td>{{ object.company }}</td>
+          <td>{{ object.phone_number }}</td>
+          <td>{{ object.email }}</td>
+          <td>{{ object.street }}</td>
+          <td>{{ object.street2 }}</td>
+          <td>{{ object.city }}</td>
+          <td>{{ object.state }}</td>
+          <td>{{ object.zip_code }}</td>
+          <td>{{ object.country }}</td>
+          <td>{{ object.website }}</td>
+          <td>{{ object.twitter }}</td>
+          <td>{{ object.facebook }}</td>
+          <td>{{ object.linkedin }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}
