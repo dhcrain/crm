@@ -1,13 +1,21 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>CRM</title>
-    <link rel="stylesheet" href="{% static "app/css/bootstrap.css" %}" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="{% static "app/css/main.css" %}" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="{% static "app_crm/css/bootstrap.css" %}" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="{% static "app_crm/css/main.css" %}" media="screen" charset="utf-8">
   </head>
   <body>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
+        <li role="presentation"><a href="#">Create User</a></li>
+      </ul>
+    </div>
     {% block content %}
       There is no content here.
     {% endblock %}
