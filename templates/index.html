@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 {% extends "base.html" %}
 
 {% block content %}
-  
-=======
-{% extends "crm/crm_base.html" %}
-
-
-{% block content %}
-    
->>>>>>> 4b5e55334ddd5506db335fa8ad57ce0f282678d9
+  {% csrf_token %}
+    <form class="" action="" method="post">
+      {{form}}
+    </form>
+  <button type="submit" name="button" value="Press this.">Press This.</button>
 {% endblock %}
