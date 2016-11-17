@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from app_crm.models import Asset
 
 
@@ -23,3 +23,6 @@ class AssetListView(ListView):
 
     def get_queryset(self):
         return Asset.objects.all()
+
+class AssetDetailView(DetailView):
+    model = Asset

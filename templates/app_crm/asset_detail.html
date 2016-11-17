@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    {{object.first_name}}
+    {{object.last_name}}
+  </div>
+{% endblock %}
