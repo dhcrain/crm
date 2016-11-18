@@ -9,7 +9,10 @@ class AssetAdmin(admin.ModelAdmin):
 admin.site.register(Asset, AssetAdmin)
 
 
-admin.site.register(Company)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name')
+
+admin.site.register(Company, CompanyAdmin)
 
 
 class NoteAdmin(admin.ModelAdmin):
