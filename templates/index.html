@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 {% load bootstrap %}
+{% load i18n %}
+{% load i18n staticfiles %}
+
+
 
 {% block content %}
   {% if request.user.is_authenticated %}
@@ -8,4 +12,27 @@
       <h2>Welcome to Billavis CRM.  Login to continue.</h2>
     </div>
   {% endif %}
+{% endblock %}
+
+
+
+{% block tab_id %}id="home_tab"{% endblock %}
+
+{% block extra_head %}
+<link rel='stylesheet' type='text/css' href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.css" />
+<script type='text/javascript' src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/1.6.4/fullcalendar.min.js"></script>
+{% endblock %}
+
+{% block body %}
+<div id="calendar"></div>
+<script type='text/javascript'>
+$(document).ready(function() {
+    // page is now ready, initialize the calendar...
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+      events: '/schedule/api/occurrences?calendar_slug=example'
+    })
+});
+</script>
+
 {% endblock %}
