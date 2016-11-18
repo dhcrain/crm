@@ -3,10 +3,14 @@ from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from localflavor.us.models import PhoneNumberField
 
 
 class Company(models.Model):
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
 
 class Asset(models.Model):
@@ -16,7 +20,7 @@ class Asset(models.Model):
     last_name = models.CharField(max_length=50, blank=True, null=True)
     company = models.ForeignKey(Company, null=True, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], blank=True, max_length=15)  # validators should be a list
+    phone_number = PhoneNumberField(blank=True) # https://django-localflavor.readthedocs.io/en/latest/localflavor/us/
     email = models.EmailField(blank=True, null=True)
     street = models.CharField(max_length=50, blank=True, null=True)
     street2 = models.CharField(max_length=50, blank=True, null=True)
@@ -29,13 +33,6 @@ class Asset(models.Model):
     facebook = models.URLField(max_length=350, blank=True, null=True)
     linkedin = models.URLField(max_length=350, blank=True, null=True)
     profile_picture = models.ImageField(upload_to="profile_images", blank=True, null=True)
-
-    # @property
-    # def company(self):
-    #     if self.is_company:
-    #         return
-    #     else:
-    #         return
 
     @property
     def profile_picture_url(self):

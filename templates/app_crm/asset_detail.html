@@ -9,41 +9,43 @@
         <div class="page-header">
           <h1>{{object.first_name}} {{object.last_name}} <small> {{object.company.name}}</small></h1>
         </div>
-      </div>
-      <div class="col-lg-4">
-        <img src="{{ object.profile_picture.url }}" class="thumbnail" width="200px" height="200px" alt="Profile Image Not Found" />
-      </div>
-    </div>
-    <div class="">
-      <h3>{{object.phone_number}}<br><br><a href="mailto: {{object.email}}">{{object.email}}</a></h3>
-    </div>
-    <div class="col-lg-5">
-      <div class="page-header">
-        <h4>Address</h4>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          {{object.street}}<br>
-          {{object.street2}}<br>
-          {{object.city}},
-          {{object.state}}
-          {{object.zip_code}}<br>
-          {{object.country}}
+        <div class="">
+          <h3>{{object.phone_number}}<br><br><a href="mailto: {{object.email}}">{{object.email}}</a></h3>
         </div>
       </div>
-    </div>
-    <div class="col-lg-2">
-    </div>
-    <div class="col-lg-5">
-      <div class="page-header">
-        <h4>Online Information</h4>
+      <div class="col-lg-4">
+        <img class="thumbnail" width="200px" height="200px" src="{{ object.profile_picture_url }}" alt="{{object.first_name}} {{object.last_name}}" />
       </div>
-      <table class='table table-striped'>
-        <tr><td><strong>Website: </strong></td><td><a href="{{object.website}}">{{object.website}}</a></td></tr>
-        <tr><td><strong>Twitter: </strong></td><td><a href="{{object.twitter}}">{{object.twitter}}</a></td></tr>
-        <tr><td><strong>Facebook: </strong></td><td><a href="{{object.facebook}}">{{object.facebook}}</a></td></tr>
-        <tr><td><strong>LinkedIn: </strong></td><td><a href="{{object.linkedin}}">{{object.linkedin}}</a></td></tr>
-      </table>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="page-header">
+          <h4>Address</h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {{object.street}}<br>
+            {{object.street2}}<br>
+            {{object.city}},
+            {{object.state}}
+            {{object.zip_code}}<br>
+            {{object.country}}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-5">
+        <div class="page-header">
+          <h4>Online Information</h4>
+        </div>
+        <table class='table table-striped'>
+          <tr><td><strong>Website: </strong></td><td><a href="{{object.website}}">{{object.website}}</a></td></tr>
+          <tr><td><strong>Twitter: </strong></td><td><a href="{{object.twitter}}">{{object.twitter}}</a></td></tr>
+          <tr><td><strong>Facebook: </strong></td><td><a href="{{object.facebook}}">{{object.facebook}}</a></td></tr>
+          <tr><td><strong>LinkedIn: </strong></td><td><a href="{{object.linkedin}}">{{object.linkedin}}</a></td></tr>
+        </table>
+      </div>
     </div>
   </div>
 {% endblock %}

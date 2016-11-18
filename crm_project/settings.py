@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app_crm',
-    'bootstrapform'
+    'bootstrapform',
+    'schedule',
+    'djangobower',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request'
             ],
         },
     },
@@ -121,3 +124,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'djangobower.finders.BowerFinder',
+)
+
+# https://github.com/llazzaro/django-scheduler
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'bootstrap'
+)
