@@ -67,9 +67,11 @@ class Task(models.Model):
 
 
 class Tag(models.Model):
-    user = models.ManyToManyField('auth.User', null=True, blank=True)
+    user = models.ManyToManyField('auth.User')
     tag = models.CharField(max_length=25)
 
+    def __str__(self):
+        return self.tag
 
 @receiver(post_save, sender='auth.User')
 def create_user_profile(**kwargs):

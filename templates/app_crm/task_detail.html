@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="page-header">
+          <h1>Task: {{object.task}}</h1>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="page-header">
+          <h4>Note Information</h4>
+        </div>
+        <table class='table table-striped'>
+          <tr><td><strong>Task Creator: </strong></td><td><a href="{{ object.creator }}">{{ object.creator }}</a></td></tr>
+          <tr><td><strong>Task is About: </strong></td><td><a href="{{ object.task_is_about }}">{{ object.task_is_about }}</a></td></tr>
+          <tr><td><strong>Due Date: </strong></td><td>{{ object.due_date }}</td></tr>
+          <tr><td><strong>Completed: </strong></td><td>{{ object.completed }}</td></tr>
+          <tr><td><strong>Date Created: </strong></td><td>{{ object.created }}</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

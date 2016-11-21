@@ -3,7 +3,10 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
-from app_crm.views import IndexView, CreateAssetView, AssetDetailView, CreateNoteView, NoteListView, NoteDetailView, CreateTagView, TagListView, TagDetailView
+from app_crm.views import IndexView, CreateAssetView, AssetDetailView, CreateNoteView, NoteListView, NoteDetailView
+from app_crm.views import CreateTagView, TagListView, TagDetailView, CreateTaskView, TaskListView, TaskDetailView
+
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

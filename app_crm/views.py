@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic import TemplateView, CreateView, ListView, DetailView
-from app_crm.models import Asset, Note
+from app_crm.models import Asset, Note, Tag, Task
 
 
 class IndexView(ListView):
@@ -33,6 +33,8 @@ class AssetDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(AssetDetailView, self).get_context_data(**kwargs)
         context["notes"] = Note.objects.all()
+        context["tags"] = Tag.objects.all()
+        context["tasks"] = Task.objects.all()
         return context
 
 
@@ -66,13 +68,13 @@ class TagDetailView(DetailView):
 
 class CreateTaskView(CreateView):
     model = Task
-    fields = ['creator', 'assigned_to', 'task_is_about', 'task', 'due_date', 'completed', 'created']
+    fields = ['creator', 'assigned_to', 'task_is_about', 'task', 'due_date', 'completed']
     success_url = reverse_lazy('task_list_view')
 
 
-class TagListView(ListView):
+class TaskListView(ListView):
     model = Task
 
 
-class TagDetailView(DetailView):
+class TaskDetailView(DetailView):
     model = Task

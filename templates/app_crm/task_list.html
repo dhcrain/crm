@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-header">
+      <h1>Task List <small>{{ request.user }}</small></h1>
+    </div>
+    <table class='table table-striped'>
+      <tr>
+        <td>#</td>
+        <td>Task Creator:</td>
+        <td>Task is About:</td>
+        <td>Task:</td>
+        <td>Due Date:</td>
+        <td>Completed?:</td>
+        <td>Date Created:</td>
+        <td></td>
+      </tr>
+      {% for object in object_list  %}
+      <tr>
+        <td>{{ object.pk }}</td>
+        <td>{{ object.creator}}</td>
+        <td>{{ object.task_is_about}}</td>
+        <td>{{ object.task}}</td>
+        <td>{{ object.due_date}}</td>
+        <td>{{ object.completed}}</td>
+        <td>{{ object.created}}</td>
+        <td><a class="btn btn-primary" href="{% url 'task_detail_view' object.pk %}" role="button">Task Details</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

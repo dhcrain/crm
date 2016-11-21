@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="page-header">
+          <h1>Tag: {{object.tag}}</h1>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="page-header">
+          <h4>Tag Information</h4>
+        </div>
+        <table class='table table-striped'>
+          <tr><td><strong>Tag Creator: </strong></td><td><a href="{{ object.user }}">{{ object.user }}</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
