@@ -47,5 +47,22 @@
         </table>
       </div>
     </div>
+    <div class="row">
+      <div class="page-header">
+        <h3>Notes: </h3>
+      </div>
+      <table class='table table-striped'>
+        <tr>
+          <td>Note Creator:</td>
+          <td>Note Details:</td>
+        </tr>
+        {% for note in notes  %}
+        <tr>
+          <td>{{ note.note_creator}}</td>
+          <td><a class="btn btn-primary" href="{% url 'note_detail_view' object.pk %}" role="button">Note Details</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
   </div>
 {% endblock %}

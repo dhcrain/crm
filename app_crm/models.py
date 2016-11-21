@@ -15,7 +15,7 @@ class Company(models.Model):
 
 class Asset(models.Model):
     user = models.ForeignKey("auth.User", null=True, blank=True)
-    is_company = models.BooleanField(default=False)
+    is_company = models.BooleanField(default=False, verbose_name='Is This a Company?')
     first_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
     company = models.ForeignKey(Company, null=True, blank=True)
@@ -34,6 +34,9 @@ class Asset(models.Model):
     linkedin = models.URLField(max_length=350, blank=True, null=True)
     profile_picture = models.ImageField(upload_to="profile_images", blank=True, null=True)
 
+    def __str__(self):
+        return '{}, {}'.format(self.last_name, self.first_name)
+
     @property
     def profile_picture_url(self):
         if self.profile_picture:
@@ -43,16 +46,18 @@ class Asset(models.Model):
 
 
 class Note(models.Model):
-    note_creator = models.ForeignKey('auth.User')
+    note_creator = models.ForeignKey('auth.User', null=True, blank=True)
     note_is_about = models.ForeignKey(Asset)
     note = models.TextField()
     note_picture = models.ImageField(upload_to="note_images", blank=True, null=True)
     note_file = models.FileField(upload_to='note_files', blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return '{}, {}'.format(self.note_creator, self.note_is_about)
 
 class Task(models.Model):
-    creator = models.ForeignKey('auth.User')
+    creator = models.ForeignKey('auth.User', null=True, blank=True)
     assigned_to = models.ForeignKey('auth.User', related_name="Assignee")
     task_is_about = models.ForeignKey(Asset)
     task = models.TextField()
@@ -62,7 +67,7 @@ class Task(models.Model):
 
 
 class Tag(models.Model):
-    user = models.ManyToManyField('auth.User')
+    user = models.ManyToManyField('auth.User', null=True, blank=True)
     tag = models.CharField(max_length=25)
 
 

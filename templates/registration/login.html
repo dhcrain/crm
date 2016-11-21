@@ -4,10 +4,17 @@
 
 {% block content %}
   <div class="container">
-    <form class="" action="index.html" method="post">
-      {% csrf_token %}
-      {{form|bootstrap}}
-      <input class="btn btn-success" type="submit" name="login" value="Login">
-    </form>
+    <div class="page-header">
+      <h1>Please Login <small> {{ request.user }}</small></h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <form class="" action="index.html" method="post">
+          {% csrf_token %}
+          {{form|bootstrap}}
+          <input class="btn btn-success" type="submit" name="login" value="Login">
+        </form>
+      </div>
+    </div>
   </div>
 {% endblock %}

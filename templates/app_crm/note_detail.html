@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="page-header">
+          <h1>Note Creator: {{object.note_creator}}</h1>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="page-header">
+          <h4>Note: </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {{object.note}}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-5">
+        <div class="page-header">
+          <h4>Note Information</h4>
+        </div>
+        <table class='table table-striped'>
+          <tr><td><strong>Note Creator: </strong></td><td><a href="{{object.note_creator}}">{{object.note_creator}}</a></td></tr>
+          <tr><td><strong>Note is About: </strong></td><td><a href="{{object.note_is_about}}">{{object.note_is_about}}</a></td></tr>
+          <tr><td><strong>Attached Files: </strong></td><td><a href="{{object.note_file}}">{{object.note_file}}</a></td></tr>
+          <tr><td><strong>Attached Pictures: </strong></td><td><a href="{{object.note_picture}}">{{object.note_picture}}</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

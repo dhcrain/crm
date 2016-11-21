@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header">
+  <h1>Create a New Note <small> {{ request.user }}</small></h1>
+  </div>
+  <div class="row">
+    <div class="col-lg-5">
+      <form class="" action=" " method="post">
+        {% csrf_token %}
+        {{ form|bootstrap}}
+        <input class="btn btn-primary" type="submit" name="create_contact" value="Create Note">
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
