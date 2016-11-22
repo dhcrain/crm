@@ -34,7 +34,7 @@
         <table class='table table-hover'>
           {% for asset in assets %}
             <tr>
-              <td><h3>{{ asset.first_name }} {{ asset.last_name }}</h3><h5>{{ asset.company }}<br><a href="mailto:{{ asset.email }}">{{ asset.email }}</a></h5></td>
+              <td><h3>{{ asset.first_name }} {{ asset.last_name }}</h3><h5>{{ asset.company }}<br><h5>{{ asset.phone_number }}</h5><a href="mailto:{{ asset.email }}">{{ asset.email }}</a></h5></td>
               <td><img class="thumbnail" width="95px" height="95px" src="{{ asset.profile_picture_url }}" alt="{{asset.first_name}} {{asset.last_name}}" />
                 <br><a class="btn btn-primary btn-xs" href="{% url 'asset_detail_view' asset.pk %}" role="button">Contact Details</a></td>
             </tr>

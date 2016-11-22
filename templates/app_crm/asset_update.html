@@ -5,15 +5,15 @@
 {% block content %}
 <div class="container">
   <div class="page-header">
-  <h1>Create a New Contact <small> {{ request.user }}</small></h1>
+  <h1>Update {{ object.first_name }}'s Contact <small> {{ request.user }}</small></h1>
   </div>
   <br>
   <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-6">
       <form class="" action=" " method="post">
         {% csrf_token %}
         {{ form|bootstrap}}
-        <input class="btn btn-primary" type="submit" name="create_contact" value="Create Contact">
+        <input class="btn btn-primary" type="submit" name="create_contact" value="Update Contact">
       </form>
     </div>
   </div>

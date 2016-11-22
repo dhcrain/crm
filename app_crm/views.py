@@ -55,6 +55,13 @@ class AssetDetailView(DetailView):
         return context
 
 
+class AssetUpdateView(UpdateView):
+    model = Asset
+    template_name = 'app_crm/asset_update.html'
+    fields = ['first_name', 'last_name', 'is_company', 'company', 'phone_number', 'email', 'street', 'street2', 'city', 'state', 'zip_code', 'country', 'website', 'twitter', 'facebook', 'linkedin', 'profile_picture']
+    success_url = reverse_lazy("index_view")
+
+
 class CreateNoteView(CreateView):
     model = Note
     fields = ['note_is_about', 'note', 'note_picture', 'note_file']
