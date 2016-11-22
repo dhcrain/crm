@@ -48,6 +48,15 @@
       </div>
     </div>
     <div class="row">
+      <div class="col-lg-12">
+        <div class="nav nav-pills nav-justified">
+          <li role="presentation"><a type="button" class="btn btn-primary" href="{% url 'create_task_view' %}">Create a Task for {{ object.first_name }}</a></li>
+          <li role="presentation"><a type="button" class="btn btn-primary" href="{% url 'create_note_view' %}">Create a Note for {{ object.first_name }}</a></li>
+          <li role="presentation"><a type="button" class="btn btn-primary" href="{% url 'create_tag_view' %}">Create a Tag for {{ object.first_name }}</a></li>
+        </div>
+      </div>
+    </div>
+    <div class="row">
       <div class="page-header">
         <h3>Notes: </h3>
       </div>

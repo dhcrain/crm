@@ -10,21 +10,47 @@
   </head>
   <body>
     <div class="container">
-      <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="/">Home</a></li>
-        <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
-        <li role="presentation"><a href="{% url 'create_asset_view' %}">Create Contact</a></li>
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" class="active"><a href="/">Dashboard</a></li>
+        {# <li role="presentation"><a href="{% url 'create_asset_view' %}">Create Contact</a></li>#}
         <li role="presentation"><a href="{% url 'note_list_view' %}">Notes</a></li>
-        <li role="presentation"><a href="{% url 'create_note_view' %}">Create Note</a></li>
+        {# <li role="presentation"><a href="{% url 'create_note_view' %}">Create Note</a></li>#}
         <li role="presentation"><a href="{% url 'task_list_view' %}">Tasks</a></li>
-        <li role="presentation"><a href="{% url 'create_task_view' %}">Create Task</a></li>
+        {# <li role="presentation"><a href="{% url 'create_task_view' %}">Create Task</a></li>#}
         <li role="presentation"><a href="{% url 'tag_list_view' %}">Tags</a></li>
-        <li role="presentation"><a href="{% url 'create_tag_view' %}">Create Tag</a></li>
+        {# <li role="presentation"><a href="{% url 'create_tag_view' %}">Create Tag</a></li>#}
         <li role="presentation"><a href="#">Calendar</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li role="presentation"><a href="{% url 'login' %}">Login</a></li>
+              {% if request.user.is_authenticated %}
+              <li role="presentation"><a href="{% url 'logout' %}">Logout</a></li>
+              <li role="presentation"><a href="{% url 'profile_page_view' %}">{{ request.user }}'s Profile</a></li>
+              {% endif %}
+            </ul>
+        </li>
       </ul>
     </div>
-    {% block content %}
-      There is no content here.
+    {% if request.user.is_authenticated %}
+      {% block content %}
+        There is no content here.
+      {% endblock %}
+    {% else %}
+      {% block notloggedin %}
+        <div class="container">
+          <div class="page-header">
+            <h1>Billavis CRM: <small>Such an Awful Name</small></h1>
+          </div>
+          <br>
+          <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login to Continue</a>
+        </div>
+      {% endblock %}
+    {% endif %}
+    <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'app_crm/js/bootstrap.js' %}"></script>
+    <script type="text/javascript">$('.dropdown-toggle').dropdown()</script>
+    {% block extrascript %}
     {% endblock %}
   </body>
 </html>

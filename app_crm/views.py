@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
 from app_crm.models import Asset, Note, Tag, Task
 
 
@@ -9,15 +9,25 @@ class IndexView(ListView):
     model = Asset
     template_name = "index.html"
 
-    def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user)
+    # def get_queryset(self):
+    #     return self.model.objects.filter(user=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context["assets"] = Asset.objects.all()
         context["tasks"] = Task.objects.all()
         context["notes"] = Note.objects.all()
+        context["tags"] = Tag.objects.all()
         return context
+
+
+class ProfilePageView(UpdateView):
+    fields = ["first_name", "last_name", "email"]
+    # model = UserProfile
+    success_url = reverse_lazy("index_view")
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 class CreateAssetView(CreateView):

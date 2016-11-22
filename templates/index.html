@@ -11,25 +11,21 @@
     </div>
     <div class="row">
       <div class="col-lg-2">
-        <div class="page-header">
-          <a href="{% url 'note_list_view' %}"><h5>Notes</h5></a>
+        <div class="nav nav-pills nav-stacked">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li role="presentation"><a href="{% url 'create_asset_view' %}">Create Contact</a></li>
+                <li role="presentation"><a href="{% url 'create_note_view' %}">Create Note</a></li>
+                <li role="presentation"><a href="{% url 'create_task_view' %}">Create Task</a></li>
+                <li role="presentation"><a href="{% url 'create_tag_view' %}">Create Tag</a></li>
+              </ul>
+          </li>
+          <li role="presentation"><a href="{% url 'note_list_view' %}">Notes</a></li>
+          <li role="presentation"><a href="{% url 'task_list_view' %}">Tasks</a></li>
+          <li role="presentation"><a href="{% url 'tag_list_view' %}">Tags</a></li>
+          <li role="presentation"><a href="#">Calendar</a></li>
         </div>
-        <table class="table table-hover">
-          {% for note in notes  %}
-            <tr>
-              <td>
-              <div class="row">
-                <div class="col-lg-1">
-                  <a class="btn btn-primary btn-xs" href="{% url 'note_detail_view' note.pk %}">{{ note.pk }}</a>
-                </div>
-                <div class="col-lg-9">
-                  {{ note.note }}
-                </div>
-              </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </table>
       </div>
       <div class="col-lg-6">
         <div class="page-header">
@@ -62,6 +58,44 @@
                 </div>
                 <div class="col-lg-3">
                   {{ task.due_date|date:"m/d/Y" }}
+                </div>
+              </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        <div class="page-header">
+          <a href="{% url 'note_list_view' %}"><h5>Notes</h5></a>
+        </div>
+        <table class="table table-hover">
+          {% for note in notes  %}
+            <tr>
+              <td>
+              <div class="row">
+                <div class="col-lg-1">
+                  <a class="btn btn-primary btn-xs" href="{% url 'note_detail_view' note.pk %}">{{ note.pk }}</a>
+                </div>
+                <div class="col-lg-9">
+                  {{ note.note }}
+                </div>
+              </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+        <div class="page-header">
+          <a href="{% url 'note_list_view' %}"><h5>Tags</h5></a>
+        </div>
+        <table class="table table-hover">
+          {% for tag in tags  %}
+            <tr>
+              <td>
+              <div class="row">
+                <div class="col-lg-1">
+                  <a class="btn btn-primary btn-xs" href="{% url 'tag_detail_view' tag.pk %}">{{ tag.pk }}</a>
+                </div>
+                <div class="col-lg-9">
+                  {{ tag.tag }}
                 </div>
               </div>
               </td>
