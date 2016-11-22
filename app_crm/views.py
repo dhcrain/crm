@@ -10,7 +10,14 @@ class IndexView(ListView):
     template_name = "index.html"
 
     def get_queryset(self):
-        return Asset.objects.all()
+        return self.model.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context["assets"] = Asset.objects.all()
+        context["tasks"] = Task.objects.all()
+        context["notes"] = Note.objects.all()
+        return context
 
 
 class CreateAssetView(CreateView):
