@@ -39,9 +39,11 @@
       </ul>
     </div>
     {% if request.user.is_authenticated %}
-      {% block content %}
-        There is no content here.
-      {% endblock %}
+      <div class="container">
+        {% block content %}
+          There is no content here.
+        {% endblock %}
+      </div>
     {% else %}
       {% block notloggedin %}
         <div class="container">

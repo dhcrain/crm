@@ -22,6 +22,10 @@ class IndexView(ListView):
         return context
 
 
+class calendar(TemplateView):
+    template_name = "calendar.html"
+
+
 class ProfilePageView(UpdateView):
     fields = ["first_name", "last_name", "email"]
     # model = UserProfile
