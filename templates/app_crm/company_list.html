@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-header">
+      <h1>Company List <small>{{ request.user }}</small></h1>
+    </div>
+    <table class='table table-striped'>
+      <tr>
+        <td>#</td>
+        <td>Company:</td>
+        <td></td>
+      </tr>
+      {% for object in object_list  %}
+      <tr>
+        <td>{{ object.pk }}</td>
+        <td>{{ object.company}}</td>
+        <td><a class="btn btn-primary" href="{% url 'company_detail_view' object.pk %}" role="button">Company Details</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

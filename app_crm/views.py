@@ -18,6 +18,7 @@ class IndexView(ListView):
         context["tasks"] = Task.objects.all()
         context["notes"] = Note.objects.all()
         context["tags"] = Tag.objects.all()
+        context["companies"] = Company.objects.all()
         return context
 
 
@@ -66,6 +67,15 @@ class CreateCompanyView(CreateView):
     model = Company
     fields = ['name']
     success_url = reverse_lazy("index_view")
+
+
+class CompanyListView(ListView):
+    model = Company
+
+
+class CompanyDetailView(DetailView):
+    model = Company
+
 
 class CreateNoteView(CreateView):
     model = Note

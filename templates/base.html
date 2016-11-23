@@ -12,13 +12,19 @@
     <div class="container">
       <ul class="nav nav-tabs nav-justified">
         <li role="presentation" class="active"><a href="/">Dashboard</a></li>
-        {# <li role="presentation"><a href="{% url 'create_asset_view' %}">Create Contact</a></li>#}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li role="presentation"><a href="{% url 'create_asset_view' %}">Create Contact</a></li>
+              <li role="presentation"><a href="{% url 'create_company_view' %}">Create Company</a></li>
+              <li role="presentation"><a href="{% url 'create_note_view' %}">Create Note</a></li>
+              <li role="presentation"><a href="{% url 'create_task_view' %}">Create Task</a></li>
+              <li role="presentation"><a href="{% url 'create_tag_view' %}">Create Tag</a></li>
+            </ul>
+        </li>
         <li role="presentation"><a href="{% url 'note_list_view' %}">Notes</a></li>
-        {# <li role="presentation"><a href="{% url 'create_note_view' %}">Create Note</a></li>#}
         <li role="presentation"><a href="{% url 'task_list_view' %}">Tasks</a></li>
-        {# <li role="presentation"><a href="{% url 'create_task_view' %}">Create Task</a></li>#}
         <li role="presentation"><a href="{% url 'tag_list_view' %}">Tags</a></li>
-        {# <li role="presentation"><a href="{% url 'create_tag_view' %}">Create Tag</a></li>#}
         <li role="presentation"><a href="#">Calendar</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>

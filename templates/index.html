@@ -16,6 +16,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create<span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li role="presentation"><a href="{% url 'create_asset_view' %}">Create Contact</a></li>
+                <li role="presentation"><a href="{% url 'create_company_view' %}">Create Company</a></li>
                 <li role="presentation"><a href="{% url 'create_note_view' %}">Create Note</a></li>
                 <li role="presentation"><a href="{% url 'create_task_view' %}">Create Task</a></li>
                 <li role="presentation"><a href="{% url 'create_tag_view' %}">Create Tag</a></li>
@@ -26,6 +27,25 @@
           <li role="presentation"><a href="{% url 'tag_list_view' %}">Tags</a></li>
           <li role="presentation"><a href="#">Calendar</a></li>
         </div>
+        <div class="page-header">
+          <a href="{% url 'company_list_view' %}"><h5>Companies</h5></a>
+        </div>
+        <table class="table table-hover">
+          {% for company in companies %}
+            <tr>
+              <td>
+              <div class="row">
+                <div class="col-lg-1">
+                  <a class="btn btn-primary btn-xs" href="{% url 'company_detail_view' company.pk %}">{{ company.pk }}</a>
+                </div>
+                <div class="col-lg-9">
+                  {{ company.name }}
+                </div>
+              </div>
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
       </div>
       <div class="col-lg-6">
         <div class="page-header">
@@ -64,27 +84,27 @@
             </tr>
           {% endfor %}
         </table>
-        <div class="page-header">
-          <a href="{% url 'note_list_view' %}"><h5>Notes</h5></a>
-        </div>
-        <table class="table table-hover">
-          {% for note in notes  %}
-            <tr>
-              <td>
-              <div class="row">
-                <div class="col-lg-1">
-                  <a class="btn btn-primary btn-xs" href="{% url 'note_detail_view' note.pk %}">{{ note.pk }}</a>
+          <div class="page-header">
+            <a href="{% url 'note_list_view' %}"><h5>Notes</h5></a>
+          </div>
+          <table class="table table-hover">
+            {% for note in notes  %}
+              <tr>
+                <td>
+                <div class="row">
+                  <div class="col-lg-1">
+                    <a class="btn btn-primary btn-xs" href="{% url 'note_detail_view' note.pk %}">{{ note.pk }}</a>
+                  </div>
+                  <div class="col-lg-9">
+                    {{ note.note }}
+                  </div>
                 </div>
-                <div class="col-lg-9">
-                  {{ note.note }}
-                </div>
-              </div>
-              </td>
-            </tr>
-          {% endfor %}
-        </table>
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
         <div class="page-header">
-          <a href="{% url 'note_list_view' %}"><h5>Tags</h5></a>
+          <a href="{% url 'tag_list_view' %}"><h5>Tags</h5></a>
         </div>
         <table class="table table-hover">
           {% for tag in tags  %}

@@ -5,7 +5,7 @@ from django.conf import settings
 
 from app_crm.views import IndexView, CreateAssetView, AssetDetailView, CreateNoteView, NoteListView, NoteDetailView
 from app_crm.views import CreateTagView, TagListView, TagDetailView, CreateTaskView, TaskListView, TaskDetailView, ProfilePageView
-from app_crm.views import AssetUpdateView, CreateCompanyView
+from app_crm.views import AssetUpdateView, CreateCompanyView, CompanyListView, CompanyDetailView
 
 
 
@@ -18,6 +18,8 @@ urlpatterns = [
     url(r'^update_asset/(?P<pk>\d+)/$', AssetUpdateView.as_view(), name="asset_update_view"),
     url(r'^asset_list/(?P<pk>\d+)/$', AssetDetailView.as_view(), name="asset_detail_view"),
     url(r'^create_company$', CreateCompanyView.as_view(), name="create_company_view"),
+    url(r'^company_list$', CompanyListView.as_view(), name="company_list_view"),
+    url(r'^company_list/(?P<pk>\d+)/$', CompanyDetailView.as_view(), name="company_detail_view"),
     url(r'^create_note$', CreateNoteView.as_view(), name="create_note_view"),
     url(r'^note_list$', NoteListView.as_view(), name="note_list_view"),
     url(r'^note_list/(?P<pk>\d+)/$', NoteDetailView.as_view(), name="note_detail_view"),
