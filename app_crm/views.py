@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
-from app_crm.models import Asset, Note, Tag, Task
+from app_crm.models import Asset, Note, Tag, Task, Company
 
 
 class IndexView(ListView):
@@ -61,6 +61,11 @@ class AssetUpdateView(UpdateView):
     fields = ['first_name', 'last_name', 'is_company', 'company', 'phone_number', 'email', 'street', 'street2', 'city', 'state', 'zip_code', 'country', 'website', 'twitter', 'facebook', 'linkedin', 'profile_picture']
     success_url = reverse_lazy("index_view")
 
+
+class CreateCompanyView(CreateView):
+    model = Company
+    fields = ['name']
+    success_url = reverse_lazy("index_view")
 
 class CreateNoteView(CreateView):
     model = Note

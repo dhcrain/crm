@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="container">
+    <div class="page-header">
+    <h1>Create a New Company <small> {{ request.user }}</small></h1>
+    </div>
+    <br>
+    <form class="" action="" method="post">
+      {% csrf_token %}
+        {{form|bootstrap}}
+      <input class="btn btn-primary" type="submit" name="newuser" value="Create Company">
+    </form>
+  </div>
+{% endblock %}
