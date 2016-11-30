@@ -20,6 +20,11 @@
         </div>
         <table class='table table-striped'>
           <tr><td><strong>Tag Creator: </strong></td><td><a href="{{ object.user }}">{{ object.user }}</a></td></tr>
+          <tr><td><strong>Assets: </strong></td>
+            {% for object in object_list %}
+              {{ object.assets }}
+            {% endfor %}
+            <td><a href="{{ object.user }}">{{ object.user }}</a></td></tr>
         </table>
         <a type="button" class="btn btn-danger" href="{% url 'tag_update_view' object.pk %}">Update Tag</a>
       </div>

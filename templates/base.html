@@ -11,7 +11,7 @@
   <body>
     <div class="container">
       <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" class="active"><a href="/">Dashboard</a></li>
+        <li role="presentation" class="active"><a href="{% url 'dashboard_page_view' %}">Dashboard</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Create<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -58,6 +58,7 @@
     <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'app_crm/js/bootstrap.js' %}"></script>
     <script type="text/javascript">$('.dropdown-toggle').dropdown()</script>
+    <script type="text/javascript">$('#myTabs a').click(function (e) {e.preventDefault() $(this).tab('show')})</script>
     {% block extrascript %}
     {% endblock %}
   </body>

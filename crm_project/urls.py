@@ -9,6 +9,7 @@ from django.contrib.auth.views import logout, login
 from app_crm.views import IndexView, CreateAssetView, AssetDetailView, CreateNoteView, NoteListView, NoteDetailView
 from app_crm.views import CreateTagView, TagListView, TagDetailView, CreateTaskView, TaskListView, TaskDetailView, ProfilePageView
 from app_crm.views import AssetUpdateView, CreateCompanyView, CompanyListView, CompanyDetailView, NoteUpdateView, TagUpdateView
+from app_crm.views import DashboardPageView
 
 
 
@@ -17,6 +18,7 @@ urlpatterns = [
     url(r'^', include('django.contrib.auth.urls')),
     url(r'^$', IndexView.as_view(), name="index_view"),
     url(r'^accounts/profile/$', ProfilePageView.as_view(), name="profile_page_view"),
+    url(r'^dashboard/$', login_required(DashboardPageView.as_view()), name="dashboard_page_view"),
     url(r'^create_asset$', login_required(CreateAssetView.as_view()), name="create_asset_view"),
     url(r'^update_asset/(?P<pk>\d+)/$', login_required(AssetUpdateView.as_view()), name="asset_update_view"),
     url(r'^asset_list/(?P<pk>\d+)/$', login_required(AssetDetailView.as_view()), name="asset_detail_view"),

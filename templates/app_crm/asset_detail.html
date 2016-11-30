@@ -59,7 +59,7 @@
     </div>
     <div class="row">
       <div class="page-header">
-        <h3>Notes: </h3>
+        <h3>Notes About {{ request.user }}: </h3>
       </div>
       <table class='table table-striped'>
         <tr>
@@ -78,7 +78,26 @@
     </div>
     <div class="row">
       <div class="page-header">
-        <h3>Tags: </h3>
+        <h3>Notes Created by {{ request.user }}: </h3>
+      </div>
+      <table class='table table-striped'>
+        <tr>
+          <td>#</td>
+          <td>Note:</td>
+          <td>Note Is About:</td>
+        </tr>
+        {% for note in notes  %}
+        <tr>
+          <td><a class="btn btn-primary btn-xs" href="{% url 'note_detail_view' note.pk %}" role="button">{{note.pk}}</a></td>
+          <td>{{ note.note }}</td>
+          <td>{{ note.note_is_about }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="row">
+      <div class="page-header">
+        <h3>Tags Assigned to {{ request.user }}: </h3>
       </div>
       <table class='table table-striped'>
         <tr>
@@ -96,6 +115,29 @@
     <div class="row">
       <div class="page-header">
         <h3>Tasks Assigned to {{ request.user }}: </h3>
+      </div>
+      <table class='table table-striped'>
+        <tr>
+          <td>#</td>
+          <td>Task is About:</td>
+          <td>Task:</td>
+          <td>Due Date:</td>
+          <td>Completed:</td>
+        </tr>
+        {% for task in tasks  %}
+        <tr>
+          <td><a class="btn btn-primary btn-xs" href="{% url 'task_detail_view' task.pk %}" role="button">{{task.pk}}</a></td>
+          <td>{{ task.task_is_about}}</td>
+          <td>{{ task.task}}</td>
+          <td>{{ task.due_date}}</td>
+          <td>{{ task.completed}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="row">
+      <div class="page-header">
+        <h3>Tasks Created by {{ request.user }}: </h3>
       </div>
       <table class='table table-striped'>
         <tr>

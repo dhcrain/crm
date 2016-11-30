@@ -13,12 +13,21 @@ class Company(models.Model):
         return self.name
 
 
+class Tag(models.Model):
+    user = models.ForeignKey('auth.User')
+    tag = models.CharField(max_length=25)
+    asset = models.ManyToManyField('app_crm.Asset', blank=True)
+
+    def __str__(self):
+        return self.tag
+
+
 class Asset(models.Model):
-    user = models.ForeignKey("auth.User", blank=True)
+    user = models.ForeignKey("auth.User")
     is_company = models.BooleanField(default=False, verbose_name='Is This a Company?')
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
-    company = models.ForeignKey(Company, blank=True)
+    company = models.ForeignKey(Company, null= True, blank=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     phone_number = PhoneNumberField(blank=True) # https://django-localflavor.readthedocs.io/en/latest/localflavor/us/
     email = models.EmailField(blank=True)
@@ -56,6 +65,7 @@ class Note(models.Model):
     def __str__(self):
         return '{}, {}'.format(self.note_creator, self.note_is_about)
 
+
 class Task(models.Model):
     creator = models.ForeignKey('auth.User', blank=True)
     assigned_to = models.ForeignKey('auth.User', related_name="Assignee")
@@ -64,14 +74,6 @@ class Task(models.Model):
     due_date = models.DateTimeField()
     completed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now=True)
-
-
-class Tag(models.Model):
-    user = models.ManyToManyField('auth.User')
-    tag = models.CharField(max_length=25)
-
-    def __str__(self):
-        return '{}, {}'.format(self.user, self.tag)
 
 
 @receiver(post_save, sender='auth.User')

@@ -20,16 +20,16 @@
             <td>Created</td>
             <td></td>
           </tr>
-      {% for object in object_list %}
+      {% for note in notes %}
         <tr>
-          <td>{{ object.pk }}</td>
-          <td>{{ object.note_creator }}</td>
-          <td>{{ object.note_is_about }}</td>
-          <td>{{ object.note }}</td>
-          <td>{{ object.note_picture }}</td>
-          <td>{{ object.note_file }}</td>
-          <td>{{ object.created }}</td>
-          <td><a class="btn btn-primary" href="{% url 'note_detail_view' object.pk %}" role="button">Note Details</a></td>
+          <td>{{ note.pk }}</td>
+          <td>{{ note.note_creator }}</td>
+          <td>{{ note.note_is_about }}</td>
+          <td>{{ note.note }}</td>
+          <td>{{ note.note_picture }}</td>
+          <td>{{ note.note_file }}</td>
+          <td>{{ note.created }}</td>
+          <td><a class="btn btn-primary" href="{% url 'note_detail_view' note.pk %}" role="button">Note Details</a></td>
         </tr>
       {% endfor %}
     </table>
