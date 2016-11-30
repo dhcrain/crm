@@ -71,7 +71,7 @@ class Tag(models.Model):
     tag = models.CharField(max_length=25)
 
     def __str__(self):
-        return self.tag
+        return '{}, {}'.format(self.user, self.tag)
 
 @receiver(post_save, sender='auth.User')
 def create_user_profile(**kwargs):

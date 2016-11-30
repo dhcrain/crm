@@ -36,6 +36,7 @@
           <tr><td><strong>Attached Files: </strong></td><td><a href="{{object.note_file}}">{{object.note_file}}</a></td></tr>
           <tr><td><strong>Attached Pictures: </strong></td><td><a href="{{object.note_picture}}">{{object.note_picture}}</a></td></tr>
         </table>
+        <a type="button" class="btn btn-danger" href="{% url 'note_update_view' object.pk %}">Update {{ object.note_creator }}'s Note</a>
       </div>
     </div>
   </div>

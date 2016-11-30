@@ -14,10 +14,10 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context["assets"] = Asset.objects.all()
-        context["tasks"] = Task.objects.all()
-        context["notes"] = Note.objects.all()
-        context["tags"] = Tag.objects.all()
+        context["assets"] = Asset.objects.filter(user=self.request.user)
+        context["tasks"] = Task.objects.filter(creator=self.request.user)
+        context["notes"] = Note.objects.filter(note_creator=self.request.user)
+        context["tags"] = Tag.objects.filter(user=self.request.user)
         context["companies"] = Company.objects.all()
         return context
 
@@ -66,11 +66,21 @@ class AssetUpdateView(UpdateView):
     fields = ['first_name', 'last_name', 'is_company', 'company', 'phone_number', 'email', 'street', 'street2', 'city', 'state', 'zip_code', 'country', 'website', 'twitter', 'facebook', 'linkedin', 'profile_picture']
     success_url = reverse_lazy("index_view")
 
+    def form_valid(self, form):
+        asset = form.save(commit=False)
+        asset.user = self.request.user
+        return super(AssetUpdateView, self).form_valid(form)
+
 
 class CreateCompanyView(CreateView):
     model = Company
     fields = ['name']
     success_url = reverse_lazy("index_view")
+
+    def form_valid(self, form):
+        company = form.save(commit=False)
+        company.user = self.request.user
+        return super(CreateCompanyView, self).form_valid(form)
 
 
 class CompanyListView(ListView):
@@ -86,6 +96,11 @@ class CreateNoteView(CreateView):
     fields = ['note_is_about', 'note', 'note_picture', 'note_file']
     success_url = reverse_lazy('note_list_view')
 
+    def form_valid(self, form):
+        note = form.save(commit=False)
+        note.user = self.request.user
+        return super(CreateNoteView, self).form_valid(form)
+
 
 class NoteListView(ListView):
     model = Note
@@ -95,10 +110,27 @@ class NoteDetailView(DetailView):
     model = Note
 
 
+class NoteUpdateView(UpdateView):
+    model = Note
+    template_name = "app_crm/note_update.html"
+    fields = ['note_is_about', 'note', 'note_picture', 'note_file']
+    success_url = reverse_lazy('note_list_view')
+
+    def form_valid(self, form):
+        note = form.save(commit=False)
+        note.user = self.request.user
+        return super(CreateNoteView, self).form_valid(form)
+
+
 class CreateTagView(CreateView):
     model = Tag
     fields = ['user', 'tag']
     success_url = reverse_lazy('tag_list_view')
+
+    def form_valid(self, form):
+        tag = form.save(commit=False)
+        tag.user = self.request.user
+        return super(CreateTagView, self).form_valid(form)
 
 
 class TagListView(ListView):
@@ -109,10 +141,21 @@ class TagDetailView(DetailView):
     model = Tag
 
 
+class TagUpdateView(UpdateView):
+    model = Tag
+    fields = ['user', 'tag']
+    success_url = reverse_lazy('tag_list_view')
+
+
 class CreateTaskView(CreateView):
     model = Task
     fields = ['creator', 'assigned_to', 'task_is_about', 'task', 'due_date', 'completed']
     success_url = reverse_lazy('task_list_view')
+
+    def form_valid(self, form):
+        task = form.save(commit=False)
+        task.user = self.request.user
+        return super(CreateTaskView, self).form_valid(form)
 
 
 class TaskListView(ListView):
