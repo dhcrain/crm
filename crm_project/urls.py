@@ -3,14 +3,16 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import logout, login
+# from django.contrib.auth.views import logout, login
 
 
-from app_crm.views import IndexView, CreateAssetView, AssetDetailView, CreateNoteView, NoteListView, NoteDetailView
-from app_crm.views import CreateTagView, TagListView, TagDetailView, CreateTaskView, TaskListView, TaskDetailView, ProfilePageView
-from app_crm.views import AssetUpdateView, CreateCompanyView, CompanyListView, CompanyDetailView, NoteUpdateView, TagUpdateView
-from app_crm.views import DashboardPageView
-
+from app_crm.views import (IndexView, CreateAssetView, AssetDetailView,
+                           CreateNoteView, NoteListView, NoteDetailView,
+                           CreateTagView, TagListView, TagDetailView,
+                           CreateTaskView, TaskListView, TaskDetailView,
+                           ProfilePageView, AssetUpdateView, CreateCompanyView,
+                           CompanyListView, CompanyDetailView, NoteUpdateView,
+                           TagUpdateView, DashboardPageView)
 
 
 urlpatterns = [

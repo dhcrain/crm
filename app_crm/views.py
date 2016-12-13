@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.core.urlresolvers import reverse_lazy
 
 from django.views.generic import TemplateView, CreateView, ListView, DetailView, UpdateView
@@ -40,7 +39,10 @@ class ProfilePageView(UpdateView):
 
 class CreateAssetView(CreateView):
     model = Asset
-    fields = ['first_name', 'last_name', 'is_company', 'company', 'phone_number', 'email', 'street', 'street2', 'city', 'state', 'zip_code', 'country', 'website', 'twitter', 'facebook', 'linkedin', 'profile_picture', 'tags']
+    fields = ['first_name', 'last_name', 'is_company', 'company',
+              'phone_number', 'email', 'street', 'street2', 'city', 'state', 'zip_code',
+              'country', 'website', 'twitter', 'facebook', 'linkedin', 'profile_picture',
+              'tags']
     success_url = reverse_lazy("dashboard_page_view")
 
     def form_valid(self, form):
@@ -66,7 +68,10 @@ class AssetDetailView(DetailView):
 class AssetUpdateView(UpdateView):
     model = Asset
     template_name = 'app_crm/asset_update.html'
-    fields = ['first_name', 'last_name', 'is_company', 'company', 'phone_number', 'email', 'street', 'street2', 'city', 'state', 'zip_code', 'country', 'website', 'twitter', 'facebook', 'linkedin', 'profile_picture', 'tags']
+    fields = ['first_name', 'last_name', 'is_company', 'company',
+              'phone_number', 'email', 'street', 'street2', 'city', 'state',
+              'zip_code', 'country', 'website', 'twitter', 'facebook', 'linkedin',
+              'profile_picture', 'tags']
     success_url = reverse_lazy("dashboard_page_view")
 
     def form_valid(self, form):
