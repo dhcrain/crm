@@ -1,2 +1,6 @@
 django
 django-bootstrap-form
+django-localflavor
+django-bower
+django-scheduler
+pillow
